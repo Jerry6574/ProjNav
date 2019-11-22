@@ -2,11 +2,9 @@ import os
 from tkinter import Tk, Label, Button, Entry
 import tkinter.font as font
 import subprocess
-import re
 
 
 PROJ_DIR = r"O:\PROJECTS"
-# PROJ_DIR = r"F:\Projects\PROJECTS"
 CAB_DIR = os.path.join(PROJ_DIR, "1- CAB")
 CAB_ALT_DIR = [os.path.join(CAB_DIR, "CAB finished -- CAB0001 to 1000")]
 
@@ -101,6 +99,7 @@ class ProjNav(Tk):
 def main():
     app = ProjNav()
     app.bind('<Return>', app.open_dir)
+
     app.mainloop()
 
 
