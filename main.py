@@ -1,5 +1,6 @@
 import os
-from tkinter import Tk, Label, Button, Entry, IntVar, END, W, E
+from tkinter import Tk, Label, Button, Entry
+import tkinter.font as font
 import subprocess
 import re
 
@@ -70,9 +71,25 @@ def open_proj_dir(proj_num):
 
 def proj_nav_gui():
     root = Tk()
+    root.title = "ProjNav"
+    myfont = font.Font(family='Helvetica', size=20)
+
+    lbl_proj_num = Label(root, text="Project Number")
+    lbl_proj_num.grid(row=0)
+    lbl_proj_num.config(font=("Helvetica", 20))
+
+    en_proj_num = Entry(root)
+    en_proj_num.grid(row=1)
+    en_proj_num.config(font=("Helvetica", 20))
+
+    btn_search = Button(root, text="Search", width=25)
+    btn_search.grid(row=2)
+    btn_search['font'] = myfont
+
+    root.mainloop()
 
 
-def main():
+def test_proj_nav():
     proj_num = "CON0088"
     # print(get_proj_dir(CON_DIR, proj_num))
 
@@ -80,6 +97,10 @@ def main():
     # print(get_proj_type_dirs(proj_type))
 
     print(open_proj_dir(proj_num))
+
+
+def main():
+    proj_nav_gui()
 
 
 if __name__ == '__main__':
