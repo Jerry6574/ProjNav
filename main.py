@@ -5,7 +5,8 @@ import subprocess
 import re
 
 
-PROJ_DIR = r"O:\PROJECTS"
+# PROJ_DIR = r"O:\PROJECTS"
+PROJ_DIR = r"F:\Projects\PROJECTS"
 CAB_DIR = os.path.join(PROJ_DIR, "1- CAB")
 CAB_ALT_DIR = [os.path.join(CAB_DIR, "CAB finished -- CAB0001 to 1000")]
 
@@ -57,13 +58,15 @@ def open_proj_dir(proj_num):
     proj_dir = get_proj_dir(primary_dir, proj_num)
 
     if proj_dir is not None:
-        return os.path.join(primary_dir, proj_dir)
+        proj_full_dir = os.path.join(primary_dir, proj_dir)
+        subprocess.Popen('explorer ' + proj_full_dir)
 
     elif proj_dir is None and alt_dirs is not None:
         for alt_dir in alt_dirs:
             proj_dir = get_proj_dir(alt_dir, proj_num)
             if proj_dir is not None:
-                return os.path.join(alt_dir, proj_dir)
+                proj_full_dir = os.path.join(alt_dir, proj_dir)
+                subprocess.Popen('explorer ' + proj_full_dir)
 
         if proj_dir is None:
             raise FileNotFoundError("Project folder for " + proj_num + " does not exist. ")
@@ -81,8 +84,9 @@ def proj_nav_gui():
     en_proj_num = Entry(root)
     en_proj_num.grid(row=1)
     en_proj_num.config(font=("Helvetica", 20))
+    # proj_num = en_proj_num.get()
 
-    btn_search = Button(root, text="Search", width=25)
+    btn_search = Button(root, text="Search", width=25, command=lambda: open_proj_dir(proj_num))
     btn_search.grid(row=2)
     btn_search['font'] = myfont
 
@@ -90,16 +94,12 @@ def proj_nav_gui():
 
 
 def test_proj_nav():
-    proj_num = "CON0088"
-    # print(get_proj_dir(CON_DIR, proj_num))
-
-    # proj_type = "ABC"
-    # print(get_proj_type_dirs(proj_type))
-
-    print(open_proj_dir(proj_num))
+    proj_num = "CAB9999"
+    open_proj_dir(proj_num)
 
 
 def main():
+    # test_proj_nav()
     proj_nav_gui()
 
 
