@@ -5,8 +5,8 @@ import subprocess
 import re
 
 
-# PROJ_DIR = r"O:\PROJECTS"
-PROJ_DIR = r"F:\Projects\PROJECTS"
+PROJ_DIR = r"O:\PROJECTS"
+# PROJ_DIR = r"F:\Projects\PROJECTS"
 CAB_DIR = os.path.join(PROJ_DIR, "1- CAB")
 CAB_ALT_DIR = [os.path.join(CAB_DIR, "CAB finished -- CAB0001 to 1000")]
 
@@ -72,35 +72,36 @@ def open_proj_dir(proj_num):
             raise FileNotFoundError("Project folder for " + proj_num + " does not exist. ")
 
 
-def proj_nav_gui():
-    root = Tk()
-    root.title = "ProjNav"
-    myfont = font.Font(family='Helvetica', size=20)
+class ProjNav(Tk):
+    def __init__(self):
+        Tk.__init__(self)
 
-    lbl_proj_num = Label(root, text="Project Number")
-    lbl_proj_num.grid(row=0)
-    lbl_proj_num.config(font=("Helvetica", 20))
+        lbl_proj_num = Label(self, text="Project Number")
+        lbl_proj_num.grid(row=0)
+        lbl_proj_num.config(font=("Helvetica", 20))
 
-    en_proj_num = Entry(root)
-    en_proj_num.grid(row=1)
-    en_proj_num.config(font=("Helvetica", 20))
-    # proj_num = en_proj_num.get()
+        self.en_proj_num = Entry(self)
+        self.en_proj_num.grid(row=1)
+        self.en_proj_num.config(font=("Helvetica", 20))
 
-    btn_search = Button(root, text="Search", width=25, command=lambda: open_proj_dir(proj_num))
-    btn_search.grid(row=2)
-    btn_search['font'] = myfont
+        self.btn_search = Button(self, text="Search", width=25, command=self.open_dir)
+        self.btn_search.grid(row=2)
+        myfont = font.Font(family='Helvetica', size=20)
+        self.btn_search['font'] = myfont
+        self.btn_search.grid(row=2)
 
-    root.mainloop()
+    def get_proj_num(self):
+        return self.en_proj_num.get()
 
-
-def test_proj_nav():
-    proj_num = "CAB9999"
-    open_proj_dir(proj_num)
+    def open_dir(self, event=None):
+        proj_num = self.get_proj_num()
+        open_proj_dir(proj_num)
 
 
 def main():
-    # test_proj_nav()
-    proj_nav_gui()
+    app = ProjNav()
+    app.bind('<Return>', app.open_dir)
+    app.mainloop()
 
 
 if __name__ == '__main__':
