@@ -89,7 +89,9 @@ class ProjNav(Tk):
         self.btn_search.grid(row=2)
 
     def get_proj_num(self):
-        return self.en_proj_num.get()
+        proj_num = self.en_proj_num.get()
+        self.en_proj_num.delete(0, 'end')
+        return proj_num
 
     def open_dir(self, event=None):
         proj_num = self.get_proj_num()
