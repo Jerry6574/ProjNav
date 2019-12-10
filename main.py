@@ -57,14 +57,14 @@ def open_proj_dir(proj_num):
 
     if proj_dir is not None:
         proj_full_dir = os.path.join(primary_dir, proj_dir)
-        subprocess.Popen('explorer ' + proj_full_dir)
+        os.startfile(proj_full_dir)
 
     elif proj_dir is None and alt_dirs is not None:
         for alt_dir in alt_dirs:
             proj_dir = get_proj_dir(alt_dir, proj_num)
             if proj_dir is not None:
                 proj_full_dir = os.path.join(alt_dir, proj_dir)
-                subprocess.Popen('explorer ' + proj_full_dir)
+                os.startfile(proj_full_dir)
 
         if proj_dir is None:
             raise FileNotFoundError("Project folder for " + proj_num + " does not exist. ")
