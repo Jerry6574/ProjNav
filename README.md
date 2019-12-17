@@ -7,3 +7,4 @@ For the sake of convenience, the prerequisite directories have been hard coded j
 This app will only work on Windows. 
 
 # Running the tests
+![ProjNav screen shot](https://raw.githubusercontent.com/ProjNav/master/img/projnav.PNG)
